@@ -1,10 +1,10 @@
-# CHESS GAME PROJECT
+## CHESS GAME PROJECT
 
-## DESCRIPTION
+## DESCRIPTION:
 This project consists in recreate a classic chess game using SFML and C++. Chess is one of the oldest and most popular board games. It is played by two opponents on a checkered board using specially created pieces of contrasting colors, most often white and black. The goal of the game is to capture the opponent's king.
 
-## PNG FILES USED FOR THE GAME
-# PIECES:
+## PNG FILES USED FOR THE GAME:
+# PIECES
 ![pawn_black](https://github.com/juanpostiglione/Chess-Game/assets/128395993/163b578b-e4a2-4f13-97c0-89b3e9b83afd)
 ![pawn_white](https://github.com/juanpostiglione/Chess-Game/assets/128395993/55cf58c7-50b0-4c0e-97cd-7a7912dd0b7e)
 ![rook_black](https://github.com/juanpostiglione/Chess-Game/assets/128395993/dbebe6a1-1d2a-4125-8de2-341a5fae598f)
@@ -18,8 +18,24 @@ This project consists in recreate a classic chess game using SFML and C++. Chess
 ![queen_black](https://github.com/juanpostiglione/Chess-Game/assets/128395993/21480464-aedb-46c6-91b8-cbaf97912025)
 ![queen_white](https://github.com/juanpostiglione/Chess-Game/assets/128395993/812dafc6-3dd8-4711-aa22-ccee3d855c48)
 
-## CMAKELISTS.TXT
-One of the files contains the CMakeLists.txt used of this SFML project, for MAC M1 and M2 
+## PROJECT STRUCTURE:
+The project is divided in different classes with useful functions for each objective in the project. Comments are everywhere in the code structure to explain the use for each function. There is important information below for part of the project structure.
+
+# Welcome Window
+This class is used to create the first window for the game, where the user can enter his/her name and start playing.
+
+# Game Window
+This class is used to create the second window for the game where the player is going to play. Inside this class, there are functions from the Board class, used to implement the logic of the game.
+
+# Board Class
+This class is used to create the board of the game, draw the pieces in the board, and move the pieces around the board.
+
+# Texture Manager
+This class is used to load the textures for the png files.
+
+# CMAKELISTS.TXT
+One of the files contains the CMakeLists.txt used of this SFML project, for MAC M1 and M2.
+
 
 
 
