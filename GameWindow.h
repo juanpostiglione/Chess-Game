@@ -17,5 +17,5 @@ public:
     GameWindow();
 
     /// FUNCTION TO DISPLAY GAME WINDOW ///
-    void GameWindowDisplay(Board& chessBoard);
+    void GameWindowDisplay(Board& chessBoard) const;
 };
