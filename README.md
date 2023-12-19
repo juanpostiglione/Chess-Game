@@ -3,6 +3,9 @@
 ## DESCRIPTION:
 This project consists in recreate a classic chess game using SFML and C++. Chess is one of the oldest and most popular board games. It is played by two opponents on a checkered board using specially created pieces of contrasting colors, most often white and black. The goal of the game is to capture the opponent's king.
 
+## INSTRUCTIONS:
+Run the program and Welcome Window will be shown, enter your name and press Enter. Game Window will be shown and the game can be played. To move the pieces, each piece needs to be clicked and dragged to a position, and then released it to place it.
+
 ## PNG FILES USED FOR THE GAME:
 # PIECES
 ![pawn_black](https://github.com/juanpostiglione/Chess-Game/assets/128395993/163b578b-e4a2-4f13-97c0-89b3e9b83afd)
