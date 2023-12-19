@@ -57,7 +57,7 @@ void WelcomeWindow::welcomeWindowDisplay(Board& chessBoard)
 
     /// CREATE RECTANGLE SHAPE ///
     sf::RectangleShape rectangle(sf::Vector2f(360,50));
-    rectangle.setFillColor(sf::Color::Black);
+    rectangle.setFillColor(sf::Color(118,150,86));
     rectangle.setPosition(width/2.0f-180,height/2.0f - 170);
 
     /// WHEN WELCOME WINDOW IS OPENED ///
@@ -115,7 +115,7 @@ void WelcomeWindow::welcomeWindowDisplay(Board& chessBoard)
             }
 
             /// DISPLAY WINDOW ///
-            welcomeWindow.clear(sf::Color::White);
+            welcomeWindow.clear(sf::Color(238,238,216));
             welcomeWindow.draw(rectangle);
             welcomeWindow.draw(welcomeWindowTitle);
             welcomeWindow.draw(welcomeWindowTitle2);
