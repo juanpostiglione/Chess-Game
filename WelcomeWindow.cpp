@@ -10,13 +10,6 @@ WelcomeWindow::WelcomeWindow()
     height = 600;
 }
 
-WelcomeWindow::WelcomeWindow(int width, int height, string playerName)
-{
-    this->width = width;
-    this->height = height;
-    this->playerName = playerName;
-}
-
 /// FUNCTION TO CENTER TEXT ///
 void WelcomeWindow::setText(sf::Text &text, float x, float y)
 {
