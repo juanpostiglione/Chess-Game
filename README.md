@@ -8,6 +8,7 @@ Run the program and Welcome Window will be shown, enter your name and press Ente
 
 ## PNG FILES USED FOR THE GAME:
 # PIECES
+Download these png files:
 ![pawn_black](https://github.com/juanpostiglione/Chess-Game/assets/128395993/163b578b-e4a2-4f13-97c0-89b3e9b83afd)
 ![pawn_white](https://github.com/juanpostiglione/Chess-Game/assets/128395993/55cf58c7-50b0-4c0e-97cd-7a7912dd0b7e)
 ![rook_black](https://github.com/juanpostiglione/Chess-Game/assets/128395993/dbebe6a1-1d2a-4125-8de2-341a5fae598f)
