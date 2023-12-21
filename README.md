@@ -31,7 +31,10 @@ This class is used to create the first window for the game, where the user can e
 This class is used to create the second window for the game where the player is going to play. Inside this class, there are functions from the Board class, used to implement the logic of the game.
 
 # Board Class
-This class is used to create the board of the game, draw the pieces in the board, and move the pieces around the board.
+This class is used to create the board of the game.
+
+# Piece Class
+This class is used to create a base class for Piece, with sub-classes for each piece of the game where each class have a function to be drawn, and a function to be moved. Inheritance is applied.
 
 # Texture Manager
 This class is used to load the textures for the png files.
