@@ -18,7 +18,7 @@ void WelcomeWindow::setText(sf::Text &text, float x, float y)
     text.setPosition(sf::Vector2f(x, y));
 }
 
-void WelcomeWindow::welcomeWindowDisplay(Board& chessBoard)
+void WelcomeWindow::welcomeWindowDisplay(Board& chessBoard, Pawn& pawnPieces, Rook& rookPieces, Knight& knightPieces, Bishop& bishopPieces, King& kingPieces, Queen& queenPieces)
 {
     /// CREATE WELCOME WINDOW ///
     sf::RenderWindow welcomeWindow(sf::VideoMode(width, height), "Chess");
@@ -109,7 +109,7 @@ void WelcomeWindow::welcomeWindowDisplay(Board& chessBoard)
                     {
                         welcomeWindow.close();
                         GameWindow window2;
-                        window2.GameWindowDisplay(chessBoard);
+                        window2.GameWindowDisplay(chessBoard, pawnPieces, rookPieces, knightPieces, bishopPieces, kingPieces,queenPieces);
                     }
                 }
             }
