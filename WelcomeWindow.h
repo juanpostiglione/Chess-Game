@@ -1,14 +1,16 @@
 #pragma once
 #include<iostream>
-#include"Board.h"
+#include "GameWindow.h"
 #include <SFML/Graphics.hpp>
 
 using namespace std;
 
 class WelcomeWindow {
+private:
+
+    /// DIMENSIONS FOR THE WINDOW ///
     float width;
     float height;
-    string playerName;
 
 public:
 
@@ -16,8 +18,9 @@ public:
     WelcomeWindow();
 
     /// FUNCTION TO DISPLAY WELCOME WINDOW ///
-    void welcomeWindowDisplay(Board& chessBoard, Pawn& pawnPieces, Rook& rookPieces, Knight& knightPieces, Bishop& bishopPieces, King& kingPieces, Queen& queenPieces);
+    void welcomeWindowDisplay(Board& chessBoard, Pawn& pawnPieces, Rook& rookPieces, Knight& knightPieces,
+                              Bishop& bishopPieces, King& kingPieces, Queen& queenPieces, WinGame& winGame) const;
 
     /// SET TEXT TO THE CENTER ///
-    void setText(sf::Text &text, float x, float y);
+    static void setText(sf::Text &text, float x, float y);
 };
