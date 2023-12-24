@@ -1,6 +1,7 @@
 #include "Board.h"
 #include <SFML/Graphics.hpp>
 
+/// DEFAULT CONSTRUCTOR ///
 Board::Board()
 {
     columnsOfSquares = 4;
