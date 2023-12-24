@@ -5,9 +5,8 @@ This project consists in recreate a classic chess game using SFML and C++. Chess
 
 # INSTRUCTIONS (IMPORTANT):
 - When capture a piece, each color has a different behavior: (Doing the wrong behavior could lead to capture the wrong piece)
-
-* Player with Black Pieces: Capture a piece using RIGHT click.
-* Player with White Pieces: Capture a piece using LEFT click.
+Player with Black Pieces: Capture a piece using RIGHT click.
+Player with White Pieces: Capture a piece using LEFT click.
 
 - To move the pieces, each piece needs to be clicked and dragged to a position, and then release it to place it.
 
