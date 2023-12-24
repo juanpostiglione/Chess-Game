@@ -4,6 +4,7 @@
 #include"GameWindow.h"
 using namespace std;
 
+/// DEFAULT CONSTRUCTOR ///
 WelcomeWindow::WelcomeWindow()
 {
     width = 800;
@@ -18,7 +19,9 @@ void WelcomeWindow::setText(sf::Text &text, float x, float y)
     text.setPosition(sf::Vector2f(x, y));
 }
 
-void WelcomeWindow::welcomeWindowDisplay(Board& chessBoard, Pawn& pawnPieces, Rook& rookPieces, Knight& knightPieces, Bishop& bishopPieces, King& kingPieces, Queen& queenPieces)
+/// FUNCTION TO DISPLAY WELCOME WINDOW ///
+void WelcomeWindow::welcomeWindowDisplay(Board& chessBoard, Pawn& pawnPieces, Rook& rookPieces, Knight& knightPieces,
+                                         Bishop& bishopPieces, King& kingPieces, Queen& queenPieces, WinGame& winGame) const
 {
     /// CREATE WELCOME WINDOW ///
     sf::RenderWindow welcomeWindow(sf::VideoMode(width, height), "Chess");
@@ -39,26 +42,37 @@ void WelcomeWindow::welcomeWindowDisplay(Board& chessBoard, Pawn& pawnPieces, Ro
 
     /// CREATE SUBTITLE ///
     sf::Text welcomeWindowTitle2;
-    welcomeWindowTitle2.setString("Enter your name:");
+    welcomeWindowTitle2.setString("Press enter to play!");
     welcomeWindowTitle2.setFont(font);
     welcomeWindowTitle2.setCharacterSize(20);
     welcomeWindowTitle2.setFillColor(sf::Color::Black);
     welcomeWindowTitle2.setStyle(sf::Text::Bold);
-    setText(welcomeWindowTitle2, width/2.0f,height/2.0f - 75);
+    setText(welcomeWindowTitle2, width/2.0f,height/2.0f);
 
-    /// CREATE USER INPUT ///
-    sf::Text userInput;
-    userInput.setString("|");
-    userInput.setFont(font);
-    userInput.setCharacterSize(18);
-    userInput.setFillColor(sf::Color::Black);
-    userInput.setStyle(sf::Text::Bold);
-    setText(userInput, width/2.0f,height/2.0f - 50);
-
-    /// CREATE RECTANGLE SHAPE ///
+    /// CREATE RECTANGLE SHAPE FOR TITLE ///
     sf::RectangleShape rectangle(sf::Vector2f(360,50));
-    rectangle.setFillColor(sf::Color(118,150,86));
+    rectangle.setFillColor(sf::Color::Black);
     rectangle.setPosition(width/2.0f-180,height/2.0f - 170);
+
+    /// CREATE RECTANGLE SHAPE 1 ///
+    sf::RectangleShape rectangle2(sf::Vector2f(50,600));
+    rectangle2.setFillColor(sf::Color(118,150,86));
+    rectangle2.setPosition(width/2.0f-400,height/2.0f-300);
+
+    /// CREATE RECTANGLE SHAPE 2 ///
+    sf::RectangleShape rectangle3(sf::Vector2f(50,600));
+    rectangle3.setFillColor(sf::Color(118,150,86));
+    rectangle3.setPosition(width/2.0f+350,height/2.0f-300);
+
+    /// CREATE RECTANGLE SHAPE 3 ///
+    sf::RectangleShape rectangle4(sf::Vector2f(800,50));
+    rectangle4.setFillColor(sf::Color(118,150,86));
+    rectangle4.setPosition(width/2.0f-400,height/2.0f-300);
+
+    /// CREATE RECTANGLE SHAPE 4 ///
+    sf::RectangleShape rectangle5(sf::Vector2f(800,50));
+    rectangle5.setFillColor(sf::Color(118,150,86));
+    rectangle5.setPosition(width/2.0f-400,height/2.0f+250);
 
     /// WHEN WELCOME WINDOW IS OPENED ///
     while(welcomeWindow.isOpen())
@@ -71,55 +85,27 @@ void WelcomeWindow::welcomeWindowDisplay(Board& chessBoard, Pawn& pawnPieces, Ro
                 welcomeWindow.close();
             }
 
-            /// USER INPUT TEXT ///
-            char someChar = static_cast<char>(event.text.unicode);
-            if(event.type == sf::Event::TextEntered)
-            {
-                if(event.text.unicode < 128)
-                {
-                    if(isalpha(someChar) && playerName.size() < 10)
-                    {
-                        playerName+= someChar;
-                        userInput.setString(playerName + "|");
-                        setText(userInput,width/2.0f,height/2.0f - 50);
-                    }
-                }
-            }
-
-            /// ERASE USER INPUT TEXT WHEN PRESSING BACKSPACE ///
-            if(event.type == sf::Event::KeyPressed)
-            {
-                if(event.key.code == sf::Keyboard::Backspace)
-                {
-                    if(!playerName.empty())
-                    {
-                        playerName.pop_back();
-                        userInput.setString(playerName + "|");
-                        setText(userInput,width/2.0f,height/2.0f - 50);
-                    }
-                }
-            }
-
             /// IF ENTER IS PRESSED, WELCOME WINDOW IS CLOSED AND GAME WINDOW IS OPENED ///
             if(event.type == sf::Event::KeyPressed)
             {
                 if(event.key.code == sf::Keyboard::Enter)
                 {
-                    if(!playerName.empty())
-                    {
-                        welcomeWindow.close();
-                        GameWindow window2;
-                        window2.GameWindowDisplay(chessBoard, pawnPieces, rookPieces, knightPieces, bishopPieces, kingPieces,queenPieces);
-                    }
+                    welcomeWindow.close();
+                    GameWindow window2;
+                    window2.GameWindowDisplay(chessBoard, pawnPieces, rookPieces, knightPieces,
+                                              bishopPieces, kingPieces,queenPieces, winGame);
                 }
             }
 
             /// DISPLAY WINDOW ///
             welcomeWindow.clear(sf::Color(238,238,216));
             welcomeWindow.draw(rectangle);
+            welcomeWindow.draw(rectangle2);
+            welcomeWindow.draw(rectangle3);
+            welcomeWindow.draw(rectangle4);
+            welcomeWindow.draw(rectangle5);
             welcomeWindow.draw(welcomeWindowTitle);
             welcomeWindow.draw(welcomeWindowTitle2);
-            welcomeWindow.draw(userInput);
             welcomeWindow.display();
         }
     }
