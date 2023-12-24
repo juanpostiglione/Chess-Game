@@ -1,7 +1,10 @@
 #include"WelcomeWindow.h"
 #include "Piece.h"
+#include "Board.h"
+#include "WinGame.h"
 int main()
 {
+    /// CREATE CLASS INSTANCES ///
     Board chessBoard;
     Pawn pawnPieces;
     Rook rookPieces;
@@ -9,7 +12,10 @@ int main()
     Bishop bishopPieces;
     King kingPieces;
     Queen queenPieces;
+    WinGame winGame;
     WelcomeWindow window1;
-    window1.welcomeWindowDisplay(chessBoard, pawnPieces, rookPieces, knightPieces, bishopPieces, kingPieces,queenPieces);
+
+    /// DISPLAY WELCOME WINDOW ///
+    window1.welcomeWindowDisplay(chessBoard, pawnPieces, rookPieces, knightPieces, bishopPieces, kingPieces,queenPieces, winGame);
     return 0;
 }
