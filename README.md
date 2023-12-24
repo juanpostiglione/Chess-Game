@@ -28,7 +28,7 @@ This project consists in recreate a classic chess game using SFML and C++. Chess
 The project is divided in different classes with useful functions for each objective in the project. Comments are everywhere in the code structure to explain the use for each function. There is important information below for part of the project structure.
 
 ## Welcome Window
-This class is used to create the first window for the game, where the user can enter his/her name and start playing.
+This class is used to create the first window for the game, press ENTER to play.
 
 ## Game Window
 This class is used to create the second window for the game where the player is going to play. Inside this class, there are functions from the Board class, Piece class and WinGame class, used to implement the logic of the game.
