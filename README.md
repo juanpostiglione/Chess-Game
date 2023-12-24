@@ -4,11 +4,10 @@
 This project consists in recreate a classic chess game using SFML and C++. Chess is one of the oldest and most popular board games. It is played by two opponents on a checkered board using specially created pieces of contrasting colors, most often white and black. The goal of the game is to capture the opponent's king.
 
 # INSTRUCTIONS (IMPORTANT):
-- When capture a piece, each color has a different behavior: (Doing the wrong behavior could lead to capture the wrong piece)
--- Player with Black Pieces: Capture a piece using RIGHT click.
--- Player with White Pieces: Capture a piece using LEFT click.
-
-- To move the pieces, each piece needs to be clicked and dragged to a position, and then release it to place it.
+1) When capture a piece, each color has a different behavior: (Doing the wrong behavior could lead to capture the wrong piece)
+- Player with Black Pieces: Capture a piece using RIGHT click.
+- Player with White Pieces: Capture a piece using LEFT click.
+2) To move the pieces, each piece needs to be clicked and dragged to a position, and then release it to place it.
 
 # PNG FILES USED FOR THE GAME:
 ## PIECES FOR DOWNLOAD:
