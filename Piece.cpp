@@ -13,14 +13,20 @@ void Pawn::draw(sf::RenderWindow& window, bool pawnSelected, bool pawnReleased,
             pawns[i].setPosition(static_cast<float>(mouse.x - 30), static_cast<float>(mouse.y - 30));
             window.draw(pawns[i]);
         }
+        /// OTHER PAWNS REMAIN VISIBLE ///
         else
         {
             window.draw(pawns[i]);
         }
 
-        /// IF PAWN IS RELEASED, IS STILL VISIBLE ///
+        /// IF PAWN IS RELEASED, IS STILL VISIBLE && PLACED AUTOMATICALLY IN THE CENTER OF A SQUARE ///
         if (pawnReleased)
         {
+            const int centerPoint = 20;
+            int snappedX = static_cast<int>((pawns[i].getPosition().x + 0.5 * centerPoint) / centerPoint) * centerPoint;
+            int snappedY = static_cast<int>((pawns[i].getPosition().y + 0.5 * centerPoint) / centerPoint) * centerPoint;
+            pawns[i].setPosition(static_cast<float>(snappedX), static_cast<float>(snappedY));
+
             window.draw(pawns[i]);
         }
 
@@ -80,9 +86,14 @@ void Rook::draw(sf::RenderWindow& window, bool rookSelected, bool rookReleased,
             window.draw(rooks[i]);
         }
 
-        /// IF ROOKS IS RELEASED, IS STILL VISIBLE ///
+        /// IF ROOK IS RELEASED, IS STILL VISIBLE && PLACED AUTOMATICALLY IN THE CENTER OF A SQUARE ///
         if (rookReleased)
         {
+            const int centerPoint = 20;
+            int snappedX = static_cast<int>((rooks[i].getPosition().x + 0.5 * centerPoint) / centerPoint) * centerPoint;
+            int snappedY = static_cast<int>((rooks[i].getPosition().y + 0.5 * centerPoint) / centerPoint) * centerPoint;
+            rooks[i].setPosition(static_cast<float>(snappedX), static_cast<float>(snappedY));
+
             window.draw(rooks[i]);
         }
 
@@ -142,9 +153,14 @@ void Knight::draw(sf::RenderWindow& window, bool knightSelected, bool knightRele
             window.draw(knights[i]);
         }
 
-        /// IF KNIGHT IS RELEASED, IS STILL VISIBLE ///
+        /// IF KNIGHT IS RELEASED, IS STILL VISIBLE && PLACED AUTOMATICALLY IN THE CENTER OF A SQUARE ///
         if (knightReleased)
         {
+            const int centerPoint = 20;
+            int snappedX = static_cast<int>((knights[i].getPosition().x + 0.5 * centerPoint) / centerPoint) * centerPoint;
+            int snappedY = static_cast<int>((knights[i].getPosition().y + 0.5 * centerPoint) / centerPoint) * centerPoint;
+            knights[i].setPosition(static_cast<float>(snappedX), static_cast<float>(snappedY));
+
             window.draw(knights[i]);
         }
 
@@ -204,9 +220,14 @@ void Bishop::draw(sf::RenderWindow& window, bool bishopSelected, bool bishopRele
             window.draw(bishops[i]);
         }
 
-        /// IF BISHOP IS RELEASED, IS STILL VISIBLE ///
+        /// IF BISHOP IS RELEASED, IS STILL VISIBLE && PLACED AUTOMATICALLY IN THE CENTER OF A SQUARE ///
         if (bishopReleased)
         {
+            const int centerPoint = 20;
+            int snappedX = static_cast<int>((bishops[i].getPosition().x + 0.5 * centerPoint) / centerPoint) * centerPoint;
+            int snappedY = static_cast<int>((bishops[i].getPosition().y + 0.5 * centerPoint) / centerPoint) * centerPoint;
+            bishops[i].setPosition(static_cast<float>(snappedX), static_cast<float>(snappedY));
+
             window.draw(bishops[i]);
         }
 
@@ -266,9 +287,14 @@ void King::draw(sf::RenderWindow& window, bool kingSelected, bool kingReleased,
             window.draw(kings);
         }
 
-        /// IF KING IS RELEASED, IS STILL VISIBLE ///
+        /// IF KING IS RELEASED, IS STILL VISIBLE && PLACED AUTOMATICALLY IN THE CENTER OF A SQUARE ///
         if (kingReleased)
         {
+            const int centerPoint = 20;
+            int snappedX = static_cast<int>((kings.getPosition().x + 0.5 * centerPoint) / centerPoint) * centerPoint;
+            int snappedY = static_cast<int>((kings.getPosition().y + 0.5 * centerPoint) / centerPoint) * centerPoint;
+            kings.setPosition(static_cast<float>(snappedX), static_cast<float>(snappedY));
+
             window.draw(kings);
         }
 
@@ -328,9 +354,14 @@ void Queen::draw(sf::RenderWindow& window, bool queenSelected, bool queenRelease
             window.draw(queens);
         }
 
-        /// IF QUEEN IS RELEASED, IS STILL VISIBLE ///
+        /// IF QUEEN IS RELEASED, IS STILL VISIBLE && PLACED AUTOMATICALLY IN THE CENTER OF A SQUARE ///
         if (queenReleased)
         {
+            const int centerPoint = 20;
+            int snappedX = static_cast<int>((queens.getPosition().x + 0.5 * centerPoint) / centerPoint) * centerPoint;
+            int snappedY = static_cast<int>((queens.getPosition().y + 0.5 * centerPoint) / centerPoint) * centerPoint;
+            queens.setPosition(static_cast<float>(snappedX), static_cast<float>(snappedY));
+
             window.draw(queens);
         }
 
