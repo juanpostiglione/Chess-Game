@@ -4,7 +4,14 @@
 This project consists in recreate a classic chess game using SFML and C++. Chess is one of the oldest and most popular board games. It is played by two opponents on a checkered board using specially created pieces of contrasting colors, most often white and black. The goal of the game is to capture the opponent's king.
 
 # INSTRUCTIONS:
-Run the program and Welcome Window will be shown, enter your name and press Enter. Game Window will be shown and the game can be played. To move the pieces, each piece needs to be clicked and dragged to a position, and then release it to place it.
+- Run the program and Welcome Window will be shown, enter your name and press Enter. Game Window will be shown and the game can be played.
+- To move the pieces, each piece needs to be clicked and dragged to a position, and then release it to place it.
+
+## WARNING:
+When capture a piece, each color has a different behavior: (Doing the wrong behavior could lead to capture the wrong piece)
+
+- Player with Black Pieces: Capture a piece using RIGHT click.
+- Player with White Pieces: Capture a piece using LEFT click.
 
 # PNG FILES USED FOR THE GAME:
 ## PIECES FOR DOWNLOAD:
@@ -28,13 +35,16 @@ The project is divided in different classes with useful functions for each objec
 This class is used to create the first window for the game, where the user can enter his/her name and start playing.
 
 ## Game Window
-This class is used to create the second window for the game where the player is going to play. Inside this class, there are functions from the Board class and Piece class, used to implement the logic of the game.
+This class is used to create the second window for the game where the player is going to play. Inside this class, there are functions from the Board class, Piece class and WinGame class, used to implement the logic of the game.
 
 ## Board Class
 This class is used to create the board of the game.
 
 ## Piece Class
 This class is used to create a base class for Piece, with sub-classes for each piece of the game where each class have a function to be drawn, and a function to be moved. Inheritance is applied.
+
+## WinGame Class
+This class is used to create functions for the capture behavior of the pieces. Also, it contains a function to display the Win Window when a player wins.
 
 ## Texture Manager
 This class is used to load the textures for the png files.
