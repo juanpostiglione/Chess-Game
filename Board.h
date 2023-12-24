@@ -1,7 +1,7 @@
 #include <SFML/Graphics.hpp>
-#include "GameWindow.h"
 class Board {
 
+    /// BOARD DIMENSIONS ///
     int columnsOfSquares;
     int rowsOfSquares;
 
