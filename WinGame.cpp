@@ -20,13 +20,13 @@ void WinGame::setText(sf::Text &text, float x, float y)
 
 /// FUNCTION TO CAPTURE PIECES VECTORS EXCEPT KING AND QUEEN ///
 void WinGame::capturePiece(sf::Event& event, sf::RenderWindow& gameWindow,
-                           vector<sf::Sprite>& piece, vector<sf::Sprite>& chosenPiece)
+                           vector<sf::Sprite>& piece, vector<vector<sf::Sprite>>& chosenPiece, sf::Mouse::Button mouseButton, int positionX, int positionY)
 {
     /// IF A PIECE IS PRESSED ///
     if (event.type == sf::Event::MouseButtonPressed)
     {
         /// IF RIGHT CLICK IS USED ///
-        if(event.mouseButton.button == sf::Mouse::Right)
+        if(event.mouseButton.button == mouseButton)
         {
             /// VECTOR FOR MOUSE ///
             sf::Vector2i mouse = sf::Mouse::getPosition(gameWindow);
@@ -34,53 +34,23 @@ void WinGame::capturePiece(sf::Event& event, sf::RenderWindow& gameWindow,
             /// FOR EACH PIECE IN THE VECTOR OF PIECES ///
             for (int i = 0; i < chosenPiece.size(); ++i)
             {
-                /// IF A PIECE IS CLICKED AND USED TO CAPTURE ANOTHER ONE ///
-                if (chosenPiece[i].getGlobalBounds().contains(gameWindow.mapPixelToCoords(mouse)))
+                for (int j = 0; j < chosenPiece[i].size(); j++)
                 {
-                    /// FOR EACH PIECE IN THE VECTOR OF PIECES OF THE OPPOSITE COLOR ///
-                    for(int p = 0; p < piece.size(); p++)
+                    /// IF A PIECE IS CLICKED AND USED TO CAPTURE ANOTHER ONE ///
+                    if (chosenPiece[i][j].getGlobalBounds().contains(gameWindow.mapPixelToCoords(mouse)))
                     {
-                        /// IF PIECE IS CLICKED OR CAPTURED ///
-                        if(piece[p].getGlobalBounds().contains(gameWindow.mapPixelToCoords(mouse)))
+                        /// FOR EACH PIECE IN THE VECTOR OF PIECES OF THE OPPOSITE COLOR ///
+                        for(int p = 0; p < piece.size(); p++)
                         {
-                            /// PIECE GET OUT OF THE BOARD ///
-                            piece[p].setPosition((p * 20) + 480  , 0);
+                            /// IF PIECE IS CLICKED OR CAPTURED ///
+                            if(piece[p].getGlobalBounds().contains(gameWindow.mapPixelToCoords(mouse)))
+                            {
+                                /// PIECE GET OUT OF THE BOARD ///
+                                piece[p].setPosition((p * 20) + positionX  , positionY);
 
-                            /// MAKE THE PIECE SMALLER ///
-                            piece[p].setScale(0.5,0.5);
-                        }
-                    }
-                }
-            }
-        }
-    }
-
-    /// IF A PIECE IS PRESSED ///
-    if (event.type == sf::Event::MouseButtonPressed)
-    {
-        /// IF LEFT CLICK IS USED ///
-        if(event.mouseButton.button == sf::Mouse::Left)
-        {
-            /// VECTOR FOR MOUSE ///
-            sf::Vector2i mouse = sf::Mouse::getPosition(gameWindow);
-
-            /// FOR EACH PIECE IN THE VECTOR OF PIECES ///
-            for (int i = 0; i < piece.size(); ++i)
-            {
-                /// IF A PIECE IS CLICKED AND USED TO CAPTURE ANOTHER ONE ///
-                if (piece[i].getGlobalBounds().contains(gameWindow.mapPixelToCoords(mouse)))
-                {
-                    /// FOR EACH PIECE IN THE VECTOR OF PIECES OF THE OPPOSITE COLOR ///
-                    for(int j = 0; j < chosenPiece.size(); j++)
-                    {
-                        /// IF PIECE IS CLICKED OR CAPTURED ///
-                        if(chosenPiece[j].getGlobalBounds().contains(gameWindow.mapPixelToCoords(mouse)))
-                        {
-                            /// PIECE GET OUT OF THE BOARD ///
-                            chosenPiece[j].setPosition((j * 20) + 480  , 550);
-
-                            /// MAKE THE PIECE SMALLER ///
-                            chosenPiece[j].setScale(0.5,0.5);
+                                /// MAKE THE PIECE SMALLER ///
+                                piece[p].setScale(0.5,0.5);
+                            }
                         }
                     }
                 }
@@ -90,7 +60,8 @@ void WinGame::capturePiece(sf::Event& event, sf::RenderWindow& gameWindow,
 }
 
 void WinGame::capturePiece2(sf::Event& event, sf::RenderWindow& gameWindow,
-                     sf::Sprite& sprite, vector<sf::Sprite>& chosenPiece, sf::Mouse::Button mouseButton1, sf::Mouse::Button mouseButton2)
+                     sf::Sprite& sprite, vector<sf::Sprite>& chosenPiece, sf::Mouse::Button mouseButton1, sf::Mouse::Button mouseButton2,
+                            int positionX1, int positionY1, int positionX2, int positionY2)
 {
     /// IF A PIECE IS PRESSED ///
     if (event.type == sf::Event::MouseButtonPressed)
@@ -114,7 +85,7 @@ void WinGame::capturePiece2(sf::Event& event, sf::RenderWindow& gameWindow,
                         if(sprite.getGlobalBounds().contains(gameWindow.mapPixelToCoords(mouse)))
                         {
                             /// PIECE GET OUT OF THE BOARD ///
-                            sprite.setPosition((j * 20) + 480  , 0);
+                            sprite.setPosition((j * 20) + positionX1  , positionY1);
 
                             /// MAKE THE PIECE SMALLER ///
                             sprite.setScale(0.5,0.5);
@@ -147,7 +118,7 @@ void WinGame::capturePiece2(sf::Event& event, sf::RenderWindow& gameWindow,
                         if(chosenPiece[j].getGlobalBounds().contains(gameWindow.mapPixelToCoords(mouse)))
                         {
                             /// PIECE GET OUT OF THE BOARD ///
-                            chosenPiece[j].setPosition((j * 20) + 480  , 550);
+                            chosenPiece[j].setPosition((j * 20) + positionX2  , positionY2);
 
                             /// MAKE THE PIECE SMALLER ///
                             chosenPiece[j].setScale(0.5,0.5);
@@ -230,7 +201,7 @@ void WinGame::capturePiece3(sf::Event& event, sf::RenderWindow& gameWindow,
 }
 
 void WinGame::isKingOutOfBoard(sf::Event &event, sf::RenderWindow &gameWindow, sf::Sprite& kingSprite,
-                             vector<sf::Sprite>& pieces, sf::Mouse::Button mouseButton)
+                             vector<vector<sf::Sprite>>& pieces, sf::Mouse::Button mouseButton)
 {
     /// IF CLICK IS PRESSED ///
     if (event.type == sf::Event::MouseButtonPressed)
@@ -244,17 +215,20 @@ void WinGame::isKingOutOfBoard(sf::Event &event, sf::RenderWindow &gameWindow, s
             /// FOR EACH PIECE IN THE VECTOR ///
             for (int i = 0; i < pieces.size(); ++i)
             {
-                /// IF A PIECE IS CLICKED AND USED TO CAPTURE ANOTHER ONE ///
-                if (pieces[i].getGlobalBounds().contains(gameWindow.mapPixelToCoords(mouse)))
+                for(int j = 0; j < pieces[i].size();j++)
                 {
-                    /// FOR EACH PIECE ///
-                    for(int j = 0; j < 1; j++)
+                    /// IF A PIECE IS CLICKED AND USED TO CAPTURE ANOTHER ONE ///
+                    if (pieces[i][j].getGlobalBounds().contains(gameWindow.mapPixelToCoords(mouse)))
                     {
-                        /// IF PIECE IS CLICKED OR CAPTURED ///
-                        if(kingSprite.getGlobalBounds().contains(gameWindow.mapPixelToCoords(mouse)))
+                        /// FOR EACH PIECE ///
+                        for(int p = 0; p < 1; p++)
                         {
-                            /// PLAYER WINS AND WIN WINDOW DISPLAY ///
-                            winWindow(mouseButton);
+                            /// IF PIECE IS CLICKED OR CAPTURED ///
+                            if(kingSprite.getGlobalBounds().contains(gameWindow.mapPixelToCoords(mouse)))
+                            {
+                                /// PLAYER WINS AND WIN WINDOW DISPLAY ///
+                                winWindow(mouseButton);
+                            }
                         }
                     }
                 }
@@ -356,3 +330,4 @@ void WinGame::winWindow(sf::Mouse::Button mouseButton)
         }
     }
 }
+
