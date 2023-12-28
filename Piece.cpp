@@ -2,7 +2,7 @@
 #include <SFML/Graphics.hpp>
 
 /// FUNCTION TO DRAW PAWNS ///
-void Pawn::draw(sf::RenderWindow& window, bool pawnSelected, bool pawnReleased,
+void Pawn::move(sf::RenderWindow& window, bool pawnSelected, bool pawnReleased,
           vector<sf::Sprite>& pawns, const sf::Vector2i& mouse, int positionX, int positionY) const
 {
     /// IF PAWN IS SELECTED, IT CAN BE SEEN WHILE IS BEING MOVED ///
@@ -13,34 +13,32 @@ void Pawn::draw(sf::RenderWindow& window, bool pawnSelected, bool pawnReleased,
             pawns[i].setPosition(static_cast<float>(mouse.x - 30), static_cast<float>(mouse.y - 30));
             window.draw(pawns[i]);
         }
+
         /// OTHER PAWNS REMAIN VISIBLE ///
         else
         {
             window.draw(pawns[i]);
         }
 
-        /// IF PAWN IS RELEASED, IS STILL VISIBLE && PLACED AUTOMATICALLY IN THE CENTER OF A SQUARE ///
+        /// IF PAWN IS RELEASED, IS PLACED AUTOMATICALLY IN THE CENTER OF A SQUARE ///
         if (pawnReleased)
         {
             const int centerPoint = 20;
             int snappedX = static_cast<int>((pawns[i].getPosition().x + 0.5 * centerPoint) / centerPoint) * centerPoint;
             int snappedY = static_cast<int>((pawns[i].getPosition().y + 0.5 * centerPoint) / centerPoint) * centerPoint;
             pawns[i].setPosition(static_cast<float>(snappedX), static_cast<float>(snappedY));
-
-            window.draw(pawns[i]);
         }
 
-        /// DRAW PAWNS FROM THE BEGINNING ///
+        /// SET POSITION PAWNS FROM THE BEGINNING ///
         if (!pawnReleased && !pawnSelected)
         {
-            pawns[i].setPosition((i * 60) + positionX, positionY);
-            window.draw(pawns[i]);
+            pawns[i].setPosition(static_cast<float>((i * 60) + positionX), static_cast<float>(positionY));
         }
     }
 }
 
 /// FUNCTION TO MOVE PAWNS ///
-void Pawn::move(sf::Event& event, sf::RenderWindow& gameWindow,
+void Pawn::pieceState(sf::Event& event, sf::RenderWindow& gameWindow,
           vector<sf::Sprite>& pawns, bool& pawn_selected, bool& pawn_released) const
 {
     /// WHEN SOMETHING IS CLICKED ///
@@ -50,10 +48,10 @@ void Pawn::move(sf::Event& event, sf::RenderWindow& gameWindow,
         sf::Vector2i mouse;
         mouse = sf::Mouse::getPosition(gameWindow);
 
-        for (int i = 0; i < pawns.size(); i++)
+        for (const auto& pawn : pawns)
         {
             /// IF A PIECE IS CLICKED ///
-            if (pawns[i].getGlobalBounds().contains(gameWindow.mapPixelToCoords(mouse)))
+            if (pawn.getGlobalBounds().contains(gameWindow.mapPixelToCoords(mouse)))
             {
                 pawn_selected = true;
                 pawn_released = false;
@@ -70,7 +68,7 @@ void Pawn::move(sf::Event& event, sf::RenderWindow& gameWindow,
 }
 
 /// FUNCTION TO DRAW ROOKS ///
-void Rook::draw(sf::RenderWindow& window, bool rookSelected, bool rookReleased,
+void Rook::move(sf::RenderWindow& window, bool rookSelected, bool rookReleased,
                 vector<sf::Sprite>& rooks, const sf::Vector2i& mouse, int positionX, int positionY) const
 {
     /// IF ROOK IS SELECTED, IT CAN BE SEEN WHILE IS BEING MOVED ///
@@ -86,28 +84,25 @@ void Rook::draw(sf::RenderWindow& window, bool rookSelected, bool rookReleased,
             window.draw(rooks[i]);
         }
 
-        /// IF ROOK IS RELEASED, IS STILL VISIBLE && PLACED AUTOMATICALLY IN THE CENTER OF A SQUARE ///
+        /// IF ROOK IS RELEASED, IS PLACED AUTOMATICALLY IN THE CENTER OF A SQUARE ///
         if (rookReleased)
         {
             const int centerPoint = 20;
             int snappedX = static_cast<int>((rooks[i].getPosition().x + 0.5 * centerPoint) / centerPoint) * centerPoint;
             int snappedY = static_cast<int>((rooks[i].getPosition().y + 0.5 * centerPoint) / centerPoint) * centerPoint;
             rooks[i].setPosition(static_cast<float>(snappedX), static_cast<float>(snappedY));
-
-            window.draw(rooks[i]);
         }
 
         /// DRAW ROOKS FROM THE BEGINNING ///
         if (!rookReleased && !rookSelected)
         {
-            rooks[i].setPosition((i * 420) + positionX, positionY);
-            window.draw(rooks[i]);
+            rooks[i].setPosition(static_cast<float>((i * 420) + positionX), static_cast<float>(positionY));
         }
     }
 }
 
 /// FUNCTION TO MOVE ROOKS ///
-void Rook::move(sf::Event& event, sf::RenderWindow& gameWindow,
+void Rook::pieceState(sf::Event& event, sf::RenderWindow& gameWindow,
                 vector<sf::Sprite>& rooks, bool& rook_selected, bool& rook_released) const
 {
     /// WHEN SOMETHING IS CLICKED ///
@@ -117,10 +112,10 @@ void Rook::move(sf::Event& event, sf::RenderWindow& gameWindow,
         sf::Vector2i mouse;
         mouse = sf::Mouse::getPosition(gameWindow);
 
-        for (int i = 0; i < rooks.size(); i++)
+        for (const auto& rook : rooks)
         {
             /// IF A PIECE IS CLICKED ///
-            if (rooks[i].getGlobalBounds().contains(gameWindow.mapPixelToCoords(mouse)))
+            if (rook.getGlobalBounds().contains(gameWindow.mapPixelToCoords(mouse)))
             {
                 rook_selected = true;
                 rook_released = false;
@@ -137,7 +132,7 @@ void Rook::move(sf::Event& event, sf::RenderWindow& gameWindow,
 }
 
 /// FUNCTION TO DRAW KNIGHTS ///
-void Knight::draw(sf::RenderWindow& window, bool knightSelected, bool knightReleased,
+void Knight::move(sf::RenderWindow& window, bool knightSelected, bool knightReleased,
                 vector<sf::Sprite>& knights, const sf::Vector2i& mouse, int positionX, int positionY) const
 {
     /// IF KNIGHT IS SELECTED, IT CAN BE SEEN WHILE IS BEING MOVED ///
@@ -153,28 +148,25 @@ void Knight::draw(sf::RenderWindow& window, bool knightSelected, bool knightRele
             window.draw(knights[i]);
         }
 
-        /// IF KNIGHT IS RELEASED, IS STILL VISIBLE && PLACED AUTOMATICALLY IN THE CENTER OF A SQUARE ///
+        /// IF KNIGHT IS RELEASED, PLACED AUTOMATICALLY IN THE CENTER OF A SQUARE ///
         if (knightReleased)
         {
             const int centerPoint = 20;
             int snappedX = static_cast<int>((knights[i].getPosition().x + 0.5 * centerPoint) / centerPoint) * centerPoint;
             int snappedY = static_cast<int>((knights[i].getPosition().y + 0.5 * centerPoint) / centerPoint) * centerPoint;
             knights[i].setPosition(static_cast<float>(snappedX), static_cast<float>(snappedY));
-
-            window.draw(knights[i]);
         }
 
         /// DRAW KNIGHTS FROM THE BEGINNING ///
         if (!knightReleased && !knightSelected)
         {
-            knights[i].setPosition((i * 300) + positionX, positionY);
-            window.draw(knights[i]);
+            knights[i].setPosition(static_cast<float>((i * 300) + positionX), static_cast<float>(positionY));
         }
     }
 }
 
 /// FUNCTION TO MOVE KNIGHTS ///
-void Knight::move(sf::Event& event, sf::RenderWindow& gameWindow,
+void Knight::pieceState(sf::Event& event, sf::RenderWindow& gameWindow,
                 vector<sf::Sprite>& knights, bool& knight_selected, bool& knight_released) const
 {
     /// WHEN SOMETHING IS CLICKED ///
@@ -184,10 +176,10 @@ void Knight::move(sf::Event& event, sf::RenderWindow& gameWindow,
         sf::Vector2i mouse;
         mouse = sf::Mouse::getPosition(gameWindow);
 
-        for (int i = 0; i < knights.size(); i++)
+        for (const auto& knight : knights)
         {
             /// IF A PIECE IS CLICKED ///
-            if (knights[i].getGlobalBounds().contains(gameWindow.mapPixelToCoords(mouse)))
+            if (knight.getGlobalBounds().contains(gameWindow.mapPixelToCoords(mouse)))
             {
                 knight_selected = true;
                 knight_released = false;
@@ -204,7 +196,7 @@ void Knight::move(sf::Event& event, sf::RenderWindow& gameWindow,
 }
 
 /// FUNCTION TO DRAW BISHOPS ///
-void Bishop::draw(sf::RenderWindow& window, bool bishopSelected, bool bishopReleased,
+void Bishop::move(sf::RenderWindow& window, bool bishopSelected, bool bishopReleased,
                   vector<sf::Sprite>& bishops, const sf::Vector2i& mouse, int positionX, int positionY) const
 {
     /// IF BISHOPS IS SELECTED, IT CAN BE SEEN WHILE IS BEING MOVED ///
@@ -220,28 +212,25 @@ void Bishop::draw(sf::RenderWindow& window, bool bishopSelected, bool bishopRele
             window.draw(bishops[i]);
         }
 
-        /// IF BISHOP IS RELEASED, IS STILL VISIBLE && PLACED AUTOMATICALLY IN THE CENTER OF A SQUARE ///
+        /// IF BISHOP IS RELEASED, IS PLACED AUTOMATICALLY IN THE CENTER OF A SQUARE ///
         if (bishopReleased)
         {
             const int centerPoint = 20;
             int snappedX = static_cast<int>((bishops[i].getPosition().x + 0.5 * centerPoint) / centerPoint) * centerPoint;
             int snappedY = static_cast<int>((bishops[i].getPosition().y + 0.5 * centerPoint) / centerPoint) * centerPoint;
             bishops[i].setPosition(static_cast<float>(snappedX), static_cast<float>(snappedY));
-
-            window.draw(bishops[i]);
         }
 
         /// DRAW BISHOPS FROM THE BEGINNING ///
         if (!bishopReleased && !bishopSelected)
         {
-            bishops[i].setPosition((i * 180) + positionX, positionY);
-            window.draw(bishops[i]);
+            bishops[i].setPosition(static_cast<float>((i * 180) + positionX), static_cast<float>(positionY));
         }
     }
 }
 
 /// FUNCTION TO MOVE KNIGHTS ///
-void Bishop::move(sf::Event& event, sf::RenderWindow& gameWindow,
+void Bishop::pieceState(sf::Event& event, sf::RenderWindow& gameWindow,
                   vector<sf::Sprite>& bishops, bool& bishop_selected, bool& bishop_released) const
 {
     /// WHEN SOMETHING IS CLICKED ///
@@ -251,10 +240,10 @@ void Bishop::move(sf::Event& event, sf::RenderWindow& gameWindow,
         sf::Vector2i mouse;
         mouse = sf::Mouse::getPosition(gameWindow);
 
-        for (int i = 0; i < bishops.size(); i++)
+        for (const auto& bishop : bishops)
         {
             /// IF A PIECE IS CLICKED ///
-            if (bishops[i].getGlobalBounds().contains(gameWindow.mapPixelToCoords(mouse)))
+            if (bishop.getGlobalBounds().contains(gameWindow.mapPixelToCoords(mouse)))
             {
                 bishop_selected = true;
                 bishop_released = false;
@@ -271,7 +260,7 @@ void Bishop::move(sf::Event& event, sf::RenderWindow& gameWindow,
 }
 
 /// FUNCTION TO DRAW KINGS ///
-void King::draw(sf::RenderWindow& window, bool kingSelected, bool kingReleased,
+void King::move(sf::RenderWindow& window, bool kingSelected, bool kingReleased,
                   sf::Sprite& kings, const sf::Vector2i& mouse, int positionX, int positionY) const
 {
     /// IF KING IS SELECTED, IT CAN BE SEEN WHILE IS BEING MOVED ///
@@ -287,28 +276,25 @@ void King::draw(sf::RenderWindow& window, bool kingSelected, bool kingReleased,
             window.draw(kings);
         }
 
-        /// IF KING IS RELEASED, IS STILL VISIBLE && PLACED AUTOMATICALLY IN THE CENTER OF A SQUARE ///
+        /// IF KING IS RELEASED, IS PLACED AUTOMATICALLY IN THE CENTER OF A SQUARE ///
         if (kingReleased)
         {
             const int centerPoint = 20;
             int snappedX = static_cast<int>((kings.getPosition().x + 0.5 * centerPoint) / centerPoint) * centerPoint;
             int snappedY = static_cast<int>((kings.getPosition().y + 0.5 * centerPoint) / centerPoint) * centerPoint;
             kings.setPosition(static_cast<float>(snappedX), static_cast<float>(snappedY));
-
-            window.draw(kings);
         }
 
         /// DRAW KINGS FROM THE BEGINNING ///
         if (!kingReleased && !kingSelected)
         {
-            kings.setPosition((i * 180) + positionX, positionY);
-            window.draw(kings);
+            kings.setPosition(static_cast<float>((i * 180) + positionX), static_cast<float>(positionY));
         }
     }
 }
 
 /// FUNCTION TO MOVE KNIGHTS ///
-void King::move(sf::Event& event, sf::RenderWindow& gameWindow,
+void King::pieceState(sf::Event& event, sf::RenderWindow& gameWindow,
                   sf::Sprite& kings, bool& king_selected, bool& king_released) const
 {
     /// WHEN SOMETHING IS CLICKED ///
@@ -338,7 +324,7 @@ void King::move(sf::Event& event, sf::RenderWindow& gameWindow,
 }
 
 /// FUNCTION TO DRAW QUEEN ///
-void Queen::draw(sf::RenderWindow& window, bool queenSelected, bool queenReleased,
+void Queen::move(sf::RenderWindow& window, bool queenSelected, bool queenReleased,
                 sf::Sprite& queens, const sf::Vector2i& mouse, int positionX, int positionY) const
 {
     /// IF QUEEN IS SELECTED, IT CAN BE SEEN WHILE IS BEING MOVED ///
@@ -354,28 +340,25 @@ void Queen::draw(sf::RenderWindow& window, bool queenSelected, bool queenRelease
             window.draw(queens);
         }
 
-        /// IF QUEEN IS RELEASED, IS STILL VISIBLE && PLACED AUTOMATICALLY IN THE CENTER OF A SQUARE ///
+        /// IF QUEEN IS RELEASED, IS PLACED AUTOMATICALLY IN THE CENTER OF A SQUARE ///
         if (queenReleased)
         {
             const int centerPoint = 20;
             int snappedX = static_cast<int>((queens.getPosition().x + 0.5 * centerPoint) / centerPoint) * centerPoint;
             int snappedY = static_cast<int>((queens.getPosition().y + 0.5 * centerPoint) / centerPoint) * centerPoint;
             queens.setPosition(static_cast<float>(snappedX), static_cast<float>(snappedY));
-
-            window.draw(queens);
         }
 
         /// DRAW QUEENS FROM THE BEGINNING ///
         if (!queenReleased && !queenSelected)
         {
-            queens.setPosition((i * 180) + positionX, positionY);
-            window.draw(queens);
+            queens.setPosition(static_cast<float>((i * 180) + positionX), static_cast<float>(positionY));
         }
     }
 }
 
 /// FUNCTION TO MOVE QUEENS ///
-void Queen::move(sf::Event& event, sf::RenderWindow& gameWindow,
+void Queen::pieceState(sf::Event& event, sf::RenderWindow& gameWindow,
                 sf::Sprite& queens, bool& queen_selected, bool& queen_released) const
 {
     /// WHEN SOMETHING IS CLICKED ///
@@ -403,3 +386,4 @@ void Queen::move(sf::Event& event, sf::RenderWindow& gameWindow,
         queen_released = true;
     }
 }
+
