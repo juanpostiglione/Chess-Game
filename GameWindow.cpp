@@ -201,148 +201,149 @@ void GameWindow::GameWindowDisplay(Board& chessBoard, Pawn& pawnPieces, Rook& ro
                 gameWindow.close();
             }
 
-            /// --------- MOVEMENT FOR PIECES --------- ///
+            /// --------- STATE OF PIECES --------- ///
 
             /// --------- BLACK PIECES --------- ///
 
-            /// MOVEMENT FOR BLACK PAWNS ///
+            /// STATE OF BLACK PAWNS ///
             for(int i = 0; i < blackPawns.size(); i++)
             {
                 pawnPieces.pieceState(event2, gameWindow, blackPawns, pawnBlackSelected, pawnBlack_released);
             }
 
-            /// MOVEMENT FOR BLACK ROOKS ///
+            /// STATE OF BLACK ROOKS ///
             for(int i = 0; i < blackRooks.size(); i++)
             {
                 rookPieces.pieceState(event2, gameWindow, blackRooks, rookBlackSelected, rookBlack_released);
             }
 
-            /// MOVEMENT FOR BLACK KNIGHTS ///
+            /// STATE OF BLACK KNIGHTS ///
             for(int i = 0; i < blackKnights.size(); i++)
             {
                 knightPieces.pieceState(event2, gameWindow, blackKnights, knightBlackSelected, knightBlack_released);
             }
 
-            /// MOVEMENT FOR BLACK BISHOPS ///
+            /// STATE OF BLACK BISHOPS ///
             for(int i = 0; i < blackBishops.size(); i++)
             {
                 bishopPieces.pieceState(event2, gameWindow, blackBishops, bishopBlackSelected, bishopBlack_released);
             }
 
-            /// MOVEMENT FOR KING BLACK ///
+            /// STATE OF KING BLACK ///
             kingPieces.pieceState(event2, gameWindow, king_blackSprite, kingBlackSelected, kingBlack_released);
 
-            /// MOVEMENT FOR QUEEN BLACK ///
+            /// STATE OF QUEEN BLACK ///
             queenPieces.pieceState(event2, gameWindow, queen_blackSprite, queenBlackSelected, queenBlack_released);
 
             /// --------- WHITE PIECES --------- ///
 
-            /// MOVEMENT FOR WHITE PAWNS ///
+            /// STATE OF WHITE PAWNS ///
             for(int i = 0; i < whitePawns.size(); i++)
             {
                 pawnPieces.pieceState(event2, gameWindow, whitePawns, pawnWhiteSelected, pawnWhite_released);
             }
 
-            /// MOVEMENT FOR WHITE ROOKS ///
+            /// STATE OF WHITE ROOKS ///
             for(int i = 0; i < whiteRooks.size(); i++)
             {
                 rookPieces.pieceState(event2, gameWindow, whiteRooks, rookWhiteSelected, rookWhite_released);
             }
 
-            /// MOVEMENT FOR WHITE KNIGHTS ///
+            /// STATE OF WHITE KNIGHTS ///
             for(int i = 0; i < whiteKnights.size(); i++)
             {
                 knightPieces.pieceState(event2, gameWindow, whiteKnights, knightWhiteSelected, knightWhite_released);
             }
 
-            /// MOVEMENT FOR WHITE BISHOPS ///
+            /// STATE OF WHITE BISHOPS ///
             for(int i = 0; i < whiteBishops.size(); i++)
             {
                 bishopPieces.pieceState(event2, gameWindow, whiteBishops, bishopWhiteSelected, bishopWhite_released);
             }
 
-            /// MOVEMENT FOR KING WHITE ///
+            /// STATE OF KING WHITE ///
             kingPieces.pieceState(event2, gameWindow, king_whiteSprite, kingWhiteSelected, kingWhite_released);
 
-            /// MOVEMENT FOR QUEEN WHITE ///
+            /// STATE OF QUEEN WHITE ///
             queenPieces.pieceState(event2, gameWindow, queen_whiteSprite, queenWhiteSelected, queenWhite_released);
         }
 
         /// DRAW BOARD IN GAME WINDOW ///
         chessBoard.drawBoard(gameWindow,greenRectangle, whiteRectangle);
 
-        /// ----------- DRAW WHITE PIECES ----------- ///
+        /// ----------- MOVE WHITE PIECES ----------- ///
 
-        /// DRAW WHITE PAWNS ///
+        /// MOVE WHITE PAWNS ///
         for(int p = 0; p < whitePawns.size(); p++)
         {
             pawnPieces.move(gameWindow,pawnWhiteSelected,pawnWhite_released, whitePawns, sf::Mouse::getPosition(gameWindow), 160, 420);
         }
 
-        /// DRAW WHITE ROOKS ///
+        /// MOVE WHITE ROOKS ///
         for(int p = 0; p < whiteRooks.size(); p++)
         {
             rookPieces.move(gameWindow,rookWhiteSelected,rookWhite_released, whiteRooks, sf::Mouse::getPosition(gameWindow), 160, 480);
         }
 
-        /// DRAW WHITE KNIGHTS ///
+        /// MOVE WHITE KNIGHTS ///
         for(int p = 0; p < whiteKnights.size(); p++)
         {
             knightPieces.move(gameWindow,knightWhiteSelected,knightWhite_released, whiteKnights, sf::Mouse::getPosition(gameWindow), 220, 480);
         }
 
-        /// DRAW WHITE KNIGHTS ///
+        /// MOVE WHITE KNIGHTS ///
         for(int p = 0; p < whiteBishops.size(); p++)
         {
             bishopPieces.move(gameWindow,bishopWhiteSelected,bishopWhite_released, whiteBishops, sf::Mouse::getPosition(gameWindow), 280, 480);
         }
 
-        /// DRAW WHITE KING ///
+        /// MOVE WHITE KING ///
         kingPieces.move(gameWindow,kingWhiteSelected,kingWhite_released, king_whiteSprite, sf::Mouse::getPosition(gameWindow), 400, 480);
 
-        /// DRAW WHITE QUEEN ///
+        /// MOVE WHITE QUEEN ///
         queenPieces.move(gameWindow,queenWhiteSelected,queenWhite_released, queen_whiteSprite, sf::Mouse::getPosition(gameWindow), 340, 480);
 
-        /// ----------- DRAW BLACK PIECES ----------- ///
+        /// ----------- MOVE BLACK PIECES ----------- ///
 
-        /// DRAW BLACK PAWNS ///
+        /// MOVE BLACK PAWNS ///
         for(int p = 0; p < blackPawns.size(); p++)
         {
             pawnPieces.move(gameWindow,pawnBlackSelected,pawnBlack_released, blackPawns, sf::Mouse::getPosition(gameWindow), 160, 120);
         }
 
-        /// DRAW BLACK ROOKS ///
+        /// MOVE BLACK ROOKS ///
         for(int p = 0; p < blackRooks.size(); p++)
         {
             rookPieces.move(gameWindow,rookBlackSelected,rookBlack_released, blackRooks, sf::Mouse::getPosition(gameWindow), 160, 60);
         }
 
-        /// DRAW BLACK KNIGHTS ///
+        /// MOVE BLACK KNIGHTS ///
         for(int p = 0; p < blackKnights.size(); p++)
         {
             knightPieces.move(gameWindow,knightBlackSelected,knightBlack_released, blackKnights, sf::Mouse::getPosition(gameWindow), 220, 60);
         }
 
-        /// DRAW BLACK BISHOPS ///
+        /// MOVE BLACK BISHOPS ///
         for(int p = 0; p < blackBishops.size(); p++)
         {
             bishopPieces.move(gameWindow,bishopBlackSelected,bishopBlack_released, blackBishops, sf::Mouse::getPosition(gameWindow), 280, 60);
         }
 
-        /// DRAW BLACK KING ///
+        /// MOVE BLACK KING ///
         kingPieces.move(gameWindow,kingBlackSelected,kingBlack_released, king_blackSprite, sf::Mouse::getPosition(gameWindow), 400, 60);
 
-        /// DRAW BLACK QUEEN ///
+        /// MOVE BLACK QUEEN ///
         queenPieces.move(gameWindow,queenBlackSelected,queenBlack_released,  queen_blackSprite, sf::Mouse::getPosition(gameWindow), 340, 60);
 
         /// ---------- WIN CONDITION ---------- ///
-
+        /// Vector of vector for Black Pieces
         vector<vector<sf::Sprite>> blackPieces;
         blackPieces.push_back(blackPawns);
         blackPieces.push_back(blackBishops);
         blackPieces.push_back(blackRooks);
         blackPieces.push_back(blackKnights);
 
+        /// Vector of vector for White Pieces
         vector<vector<sf::Sprite>> whitePieces;
         whitePieces.push_back(whitePawns);
         whitePieces.push_back(whiteBishops);
