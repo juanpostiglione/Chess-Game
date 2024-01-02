@@ -8,6 +8,7 @@ This project consists in recreate a classic chess game using SFML and C++. Chess
 - Player with Black Pieces: Capture a piece using RIGHT click.
 - Player with White Pieces: Capture a piece using LEFT click.
 2) To move the pieces, each piece needs to be clicked and dragged to a position, and then release it to place it.
+3) There are functions that provide the specififc movement for each piece, if you try to move the piece with a behavior that does not correspond to it. The piece will go back to its latest position.  
 
 # PNG FILES USED FOR THE GAME:
 ## PIECES FOR DOWNLOAD:
