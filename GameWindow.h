@@ -26,5 +26,5 @@ public:
 
     /// FUNCTION TO DISPLAY GAME WINDOW ///
     void GameWindowDisplay(Board& chessBoard, Pawn& pawnPieces, Rook& rookPieces, Knight& knightPieces,
-                           Bishop& bishopPieces, King& kingPieces, Queen& queenPieces, WinGame& winGame) const;
+                           Bishop& bishopPieces, King& kingPieces, Queen& queenPieces, WinGame& winGame) ;
 };
