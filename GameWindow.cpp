@@ -2,8 +2,14 @@
 #include "GameWindow.h"
 #include"TextureManager.h"
 #include"Board.h"
-#include"Piece.h"
 #include"WinGame.h"
+#include"Pawn.h"
+#include"Knight.h"
+#include"Rook.h"
+#include"Bishop.h"
+#include"King.h"
+#include"Queen.h"
+
 
 using namespace std;
 
@@ -12,11 +18,12 @@ GameWindow::GameWindow()
 {
     width = 800;
     height = 600;
+
 }
 
 /// FUNCTION TO DISPLAY GAME WINDOW ///
 void GameWindow::GameWindowDisplay(Board& chessBoard, Pawn& pawnPieces, Rook& rookPieces, Knight& knightPieces,
-                                   Bishop& bishopPieces, King& kingPieces, Queen& queenPieces, WinGame& winGame) const
+                                   Bishop& bishopPieces, King& kingPieces, Queen& queenPieces, WinGame& winGame)
 {
     /// CREATE GAME WINDOW ///
     sf::RenderWindow gameWindow(sf::VideoMode(width,height), "Chess");
@@ -192,7 +199,7 @@ void GameWindow::GameWindowDisplay(Board& chessBoard, Pawn& pawnPieces, Rook& ro
     /// WHEN GAME WINDOW IS OPENED ///
     while(gameWindow.isOpen())
     {
-        gameWindow.clear(sf::Color(160,160,160));
+
         sf::Event event2;
         while(gameWindow.pollEvent(event2))
         {
@@ -201,240 +208,248 @@ void GameWindow::GameWindowDisplay(Board& chessBoard, Pawn& pawnPieces, Rook& ro
                 gameWindow.close();
             }
 
-            /// --------- STATE OF PIECES --------- ///
+            /// Vector of vector for Black Pieces
+            vector<vector<sf::Sprite>> blackPieces;
+            blackPieces.push_back(blackPawns);
+            blackPieces.push_back(blackBishops);
+            blackPieces.push_back(blackRooks);
+            blackPieces.push_back(blackKnights);
+
+            /// Vector of vector for White Pieces
+            vector<vector<sf::Sprite>> whitePieces;
+            whitePieces.push_back(whitePawns);
+            whitePieces.push_back(whiteBishops);
+            whitePieces.push_back(whiteRooks);
+            whitePieces.push_back(whiteKnights);
+
+            /// --------- RULE OF PIECES --------- ///
 
             /// --------- BLACK PIECES --------- ///
+            gameWindow.clear(sf::Color(160,160,160));
 
-            /// STATE OF BLACK PAWNS ///
+            /// RULE  OF BLACK PAWNS ///
             for(int i = 0; i < blackPawns.size(); i++)
             {
-                pawnPieces.pieceState(event2, gameWindow, blackPawns, pawnBlackSelected, pawnBlack_released);
+                pawnPieces.blackPieceRule(event2, gameWindow, blackPawns, pawnBlackSelected, pawnBlack_released, 160, 120,sf::Mouse::getPosition(gameWindow));
             }
 
-            /// STATE OF BLACK ROOKS ///
+            /// RULE  OF BLACK ROOKS ///
             for(int i = 0; i < blackRooks.size(); i++)
             {
-                rookPieces.pieceState(event2, gameWindow, blackRooks, rookBlackSelected, rookBlack_released);
+                rookPieces.blackPieceRule(event2, gameWindow, blackRooks, rookBlackSelected, rookBlack_released, 160, 60,sf::Mouse::getPosition(gameWindow));
             }
 
-            /// STATE OF BLACK KNIGHTS ///
+            /// RULE  OF BLACK KNIGHTS ///
             for(int i = 0; i < blackKnights.size(); i++)
             {
-                knightPieces.pieceState(event2, gameWindow, blackKnights, knightBlackSelected, knightBlack_released);
+                knightPieces.blackPieceRule(event2, gameWindow, blackKnights, knightBlackSelected, knightBlack_released,220, 60,sf::Mouse::getPosition(gameWindow));
             }
 
-            /// STATE OF BLACK BISHOPS ///
+            /// RULE  OF BLACK BISHOPS ///
             for(int i = 0; i < blackBishops.size(); i++)
             {
-                bishopPieces.pieceState(event2, gameWindow, blackBishops, bishopBlackSelected, bishopBlack_released);
+                bishopPieces.blackPieceRule(event2, gameWindow, blackBishops, bishopBlackSelected, bishopBlack_released, 280, 60,sf::Mouse::getPosition(gameWindow));
             }
 
-            /// STATE OF KING BLACK ///
-            kingPieces.pieceState(event2, gameWindow, king_blackSprite, kingBlackSelected, kingBlack_released);
+            /// RULE OF KING BLACK ///
+            kingPieces.blackPieceRule(event2, gameWindow, king_blackSprite, kingBlackSelected, kingBlack_released, 400, 60, sf::Mouse::getPosition(gameWindow));
 
-            /// STATE OF QUEEN BLACK ///
-            queenPieces.pieceState(event2, gameWindow, queen_blackSprite, queenBlackSelected, queenBlack_released);
+            /// RULE  OF QUEEN BLACK ///
+            queenPieces.blackPieceRule(event2, gameWindow, queen_blackSprite, queenBlackSelected, queenBlack_released, 340, 60, sf::Mouse::getPosition(gameWindow));
 
             /// --------- WHITE PIECES --------- ///
 
-            /// STATE OF WHITE PAWNS ///
+            /// RULE  OF WHITE PAWNS ///
             for(int i = 0; i < whitePawns.size(); i++)
             {
-                pawnPieces.pieceState(event2, gameWindow, whitePawns, pawnWhiteSelected, pawnWhite_released);
+                pawnPieces.whitePieceRule(event2, gameWindow, whitePawns, pawnWhiteSelected, pawnWhite_released,  160, 420,  sf::Mouse::getPosition(gameWindow));
             }
 
-            /// STATE OF WHITE ROOKS ///
+            /// RULE  OF WHITE ROOKS ///
             for(int i = 0; i < whiteRooks.size(); i++)
             {
-                rookPieces.pieceState(event2, gameWindow, whiteRooks, rookWhiteSelected, rookWhite_released);
+                rookPieces.whitePieceRule(event2, gameWindow, whiteRooks, rookWhiteSelected, rookWhite_released, 160, 480,sf::Mouse::getPosition(gameWindow));
             }
 
-            /// STATE OF WHITE KNIGHTS ///
+            /// RULE  OF WHITE KNIGHTS ///
             for(int i = 0; i < whiteKnights.size(); i++)
             {
-                knightPieces.pieceState(event2, gameWindow, whiteKnights, knightWhiteSelected, knightWhite_released);
+                knightPieces.whitePieceRule(event2, gameWindow, whiteKnights, knightWhiteSelected, knightWhite_released,220, 480,sf::Mouse::getPosition(gameWindow));
             }
 
-            /// STATE OF WHITE BISHOPS ///
+            /// RULE  OF WHITE BISHOPS ///
             for(int i = 0; i < whiteBishops.size(); i++)
             {
-                bishopPieces.pieceState(event2, gameWindow, whiteBishops, bishopWhiteSelected, bishopWhite_released);
+                bishopPieces.whitePieceRule(event2, gameWindow, whiteBishops, bishopWhiteSelected, bishopWhite_released, 280, 480,sf::Mouse::getPosition(gameWindow));
             }
 
-            /// STATE OF KING WHITE ///
-            kingPieces.pieceState(event2, gameWindow, king_whiteSprite, kingWhiteSelected, kingWhite_released);
+            /// RULE  OF KING WHITE ///
+            kingPieces.whitePieceRule(event2, gameWindow, king_whiteSprite, kingWhiteSelected, kingWhite_released,  400, 480, sf::Mouse::getPosition(gameWindow));
 
-            /// STATE OF QUEEN WHITE ///
-            queenPieces.pieceState(event2, gameWindow, queen_whiteSprite, queenWhiteSelected, queenWhite_released);
+            /// RULE  OF QUEEN WHITE ///
+            queenPieces.whitePieceRule(event2, gameWindow, queen_whiteSprite, queenWhiteSelected, queenWhite_released, 340, 480, sf::Mouse::getPosition(gameWindow));
+
+            /// DRAW BOARD IN GAME WINDOW ///
+            chessBoard.drawBoard(gameWindow,greenRectangle, whiteRectangle);
+
+            /// ----------- MOVE WHITE PIECES ----------- ///
+
+            /// MOVE WHITE PAWNS ///
+            for(int p = 0; p < whitePawns.size(); p++)
+            {
+                pawnPieces.move(gameWindow,pawnWhiteSelected,pawnWhite_released, whitePawns, sf::Mouse::getPosition(gameWindow), 160, 420);
+            }
+
+            /// MOVE WHITE ROOKS ///
+            for(int p = 0; p < whiteRooks.size(); p++)
+            {
+                rookPieces.move(gameWindow,rookWhiteSelected,rookWhite_released, whiteRooks, sf::Mouse::getPosition(gameWindow), 160, 480);
+            }
+
+            /// MOVE WHITE KNIGHTS ///
+            for(int p = 0; p < whiteKnights.size(); p++)
+            {
+                knightPieces.move(gameWindow,knightWhiteSelected,knightWhite_released, whiteKnights, sf::Mouse::getPosition(gameWindow), 220, 480);
+            }
+
+            /// MOVE WHITE KNIGHTS ///
+            for(int p = 0; p < whiteBishops.size(); p++)
+            {
+                bishopPieces.move(gameWindow,bishopWhiteSelected,bishopWhite_released, whiteBishops, sf::Mouse::getPosition(gameWindow), 280, 480);
+            }
+
+            /// MOVE WHITE KING ///
+            kingPieces.move(gameWindow,kingWhiteSelected,kingWhite_released, king_whiteSprite, sf::Mouse::getPosition(gameWindow), 400, 480);
+
+            /// MOVE WHITE QUEEN ///
+            queenPieces.move(gameWindow,queenWhiteSelected,queenWhite_released, queen_whiteSprite, sf::Mouse::getPosition(gameWindow), 340, 480);
+
+            /// ----------- MOVE BLACK PIECES ----------- ///
+
+            /// MOVE BLACK PAWNS ///
+            for(int p = 0; p < blackPawns.size(); p++)
+            {
+                pawnPieces.move(gameWindow,pawnBlackSelected,pawnBlack_released, blackPawns, sf::Mouse::getPosition(gameWindow), 160, 120);
+            }
+
+            /// MOVE BLACK ROOKS ///
+            for(int p = 0; p < blackRooks.size(); p++)
+            {
+                rookPieces.move(gameWindow,rookBlackSelected,rookBlack_released, blackRooks, sf::Mouse::getPosition(gameWindow), 160, 60);
+            }
+
+            /// MOVE BLACK KNIGHTS ///
+            for(int p = 0; p < blackKnights.size(); p++)
+            {
+                knightPieces.move(gameWindow,knightBlackSelected,knightBlack_released, blackKnights, sf::Mouse::getPosition(gameWindow), 220, 60);
+            }
+
+            /// MOVE BLACK BISHOPS ///
+            for(int p = 0; p < blackBishops.size(); p++)
+            {
+                bishopPieces.move(gameWindow,bishopBlackSelected,bishopBlack_released, blackBishops, sf::Mouse::getPosition(gameWindow), 280, 60);
+            }
+
+            /// MOVE BLACK KING ///
+            kingPieces.move(gameWindow,kingBlackSelected,kingBlack_released, king_blackSprite, sf::Mouse::getPosition(gameWindow), 400, 60);
+
+            /// MOVE BLACK QUEEN ///
+            queenPieces.move(gameWindow,queenBlackSelected,queenBlack_released,  queen_blackSprite, sf::Mouse::getPosition(gameWindow), 340, 60);
+
+            /// ---------- WIN CONDITION ---------- ///
+
+            /// WHEN WHITE KING OUT OF BOARD ///
+
+            /// When White King is captured by black pieces except Black King and Black Queen
+            winGame.isKingOutOfBoard(event2, gameWindow, king_whiteSprite, blackPieces, sf::Mouse::Right);
+
+            /// When White King is captured by Black King
+            winGame.isKingOutOfBoard2(event2,gameWindow,king_blackSprite,king_whiteSprite, sf::Mouse::Right);
+
+            /// When White King is captured by Black Queen
+            winGame.isKingOutOfBoard2(event2,gameWindow,queen_blackSprite,king_whiteSprite, sf::Mouse::Right);
+
+            /// WHEN BLACK KING OUT OF BOARD ///
+            /// When Black King is captured by white pieces except White King and White Queen
+            winGame.isKingOutOfBoard(event2, gameWindow, king_blackSprite, whitePieces, sf::Mouse::Left);
+
+            /// When Black King is captured by White King
+            winGame.isKingOutOfBoard2(event2,gameWindow,king_whiteSprite,king_blackSprite, sf::Mouse::Left);
+
+            /// When Black King is captured by White Queen
+            winGame.isKingOutOfBoard2(event2,gameWindow,queen_whiteSprite,king_blackSprite, sf::Mouse::Left);
+
+            /// --------- CAPTURE BEHAVIOR --------- ///
+
+            /// PAWNS ///
+            /// White Pieces can be captured by black pieces
+            winGame.capturePiece(event2, gameWindow, whitePawns, blackPieces, sf::Mouse::Right, 480,0);
+
+            /// Black Pieces can be captured by black pieces
+            winGame.capturePiece(event2, gameWindow, blackPawns, whitePieces, sf::Mouse::Left, 480,550);
+
+            /// ROOKS ///
+            /// White Pieces can be captured by black pieces
+            winGame.capturePiece(event2, gameWindow, whiteRooks, blackPieces, sf::Mouse::Right, 480,0);
+
+            /// Black Pieces can be captured by black pieces
+            winGame.capturePiece(event2, gameWindow, blackRooks, whitePieces, sf::Mouse::Left, 480,550);
+
+            /// KNIGHTS ///
+            /// White Pieces can be captured by black pieces
+            winGame.capturePiece(event2, gameWindow, whiteKnights, blackPieces, sf::Mouse::Right, 480,0);
+
+            /// Black Pieces can be captured by black pieces
+            winGame.capturePiece(event2, gameWindow, blackKnights, whitePieces, sf::Mouse::Left, 480,550);
+
+            /// BISHOPS ///
+            /// White Pieces can be captured by black pieces
+            winGame.capturePiece(event2, gameWindow, whiteBishops, blackPieces, sf::Mouse::Right, 480,0);
+
+            /// Black Pieces can be captured by black pieces
+            winGame.capturePiece(event2, gameWindow, blackBishops, whitePieces, sf::Mouse::Left, 480,550);
+
+            /// KINGS ///
+            /// Black King can be captured by white pieces and vice versa
+            winGame.capturePiece2(event2, gameWindow, king_blackSprite, whitePawns,sf::Mouse::Left, sf::Mouse::Right,480,550,480,0);
+            winGame.capturePiece2(event2, gameWindow, king_blackSprite, whiteBishops,sf::Mouse::Left, sf::Mouse::Right,480,550,480,0);
+            winGame.capturePiece2(event2, gameWindow, king_blackSprite,whiteKnights,sf::Mouse::Left, sf::Mouse::Right,480,550,480,0);
+            winGame.capturePiece2(event2, gameWindow, king_blackSprite,whiteRooks,sf::Mouse::Left, sf::Mouse::Right,480,550,480,0);
+
+            /// White King can be captured by black pieces and vice versa
+            winGame.capturePiece2(event2, gameWindow, king_whiteSprite, blackPawns,sf::Mouse::Right, sf::Mouse::Left,480,0,480,550);
+            winGame.capturePiece2(event2, gameWindow, king_whiteSprite, blackBishops,sf::Mouse::Right, sf::Mouse::Left,480,0,480,550);
+            winGame.capturePiece2(event2, gameWindow, king_whiteSprite,blackKnights,sf::Mouse::Right, sf::Mouse::Left,480,0,480,550);
+            winGame.capturePiece2(event2, gameWindow, king_whiteSprite,blackRooks,sf::Mouse::Right, sf::Mouse::Left,480,0,480,550);
+
+            /// Black King can be captured by White King and vice versa
+            winGame.capturePiece3(event2, gameWindow, king_blackSprite,king_whiteSprite);
+
+            /// Black King can be captured by White Queen and vice versa
+            winGame.capturePiece3(event2, gameWindow, king_blackSprite,queen_whiteSprite);
+
+            /// QUEENS ///
+            /// Black Queen can be captured by black pieces and vice versa
+            winGame.capturePiece2(event2, gameWindow, queen_blackSprite, whitePawns,sf::Mouse::Left, sf::Mouse::Right,480,550,480,0);
+            winGame.capturePiece2(event2, gameWindow, queen_blackSprite, whiteBishops,sf::Mouse::Left, sf::Mouse::Right,480,550,480,0);
+            winGame.capturePiece2(event2, gameWindow, queen_blackSprite,whiteKnights,sf::Mouse::Left, sf::Mouse::Right,480,550,480,0);
+            winGame.capturePiece2(event2, gameWindow, queen_blackSprite,whiteRooks,sf::Mouse::Left, sf::Mouse::Right,480,550,480,0);
+
+            /// White Queen can be captured by black pieces and vice versa
+            winGame.capturePiece2(event2, gameWindow, queen_whiteSprite, blackPawns,sf::Mouse::Right, sf::Mouse::Left,480,0,480,550);
+            winGame.capturePiece2(event2, gameWindow, queen_whiteSprite, blackBishops,sf::Mouse::Right, sf::Mouse::Left,480,0,480,550);
+            winGame.capturePiece2(event2, gameWindow, queen_whiteSprite,blackKnights,sf::Mouse::Right, sf::Mouse::Left,480,0,480,550);
+            winGame.capturePiece2(event2, gameWindow, queen_whiteSprite,blackRooks,sf::Mouse::Right, sf::Mouse::Left,480,0,480,550);
+
+            /// Black Queen can be captured by White Queen and vice versa
+            winGame.capturePiece3(event2, gameWindow, queen_blackSprite,queen_whiteSprite);
+
+            /// Black Queen can be captured by White King and vice versa
+            winGame.capturePiece3(event2, gameWindow, queen_blackSprite,king_whiteSprite);
+
+            /// -------- GAME WINDOW DISPLAY -------- ///
+            gameWindow.display();
         }
-
-        /// DRAW BOARD IN GAME WINDOW ///
-        chessBoard.drawBoard(gameWindow,greenRectangle, whiteRectangle);
-
-        /// ----------- MOVE WHITE PIECES ----------- ///
-
-        /// MOVE WHITE PAWNS ///
-        for(int p = 0; p < whitePawns.size(); p++)
-        {
-            pawnPieces.move(gameWindow,pawnWhiteSelected,pawnWhite_released, whitePawns, sf::Mouse::getPosition(gameWindow), 160, 420);
-        }
-
-        /// MOVE WHITE ROOKS ///
-        for(int p = 0; p < whiteRooks.size(); p++)
-        {
-            rookPieces.move(gameWindow,rookWhiteSelected,rookWhite_released, whiteRooks, sf::Mouse::getPosition(gameWindow), 160, 480);
-        }
-
-        /// MOVE WHITE KNIGHTS ///
-        for(int p = 0; p < whiteKnights.size(); p++)
-        {
-            knightPieces.move(gameWindow,knightWhiteSelected,knightWhite_released, whiteKnights, sf::Mouse::getPosition(gameWindow), 220, 480);
-        }
-
-        /// MOVE WHITE KNIGHTS ///
-        for(int p = 0; p < whiteBishops.size(); p++)
-        {
-            bishopPieces.move(gameWindow,bishopWhiteSelected,bishopWhite_released, whiteBishops, sf::Mouse::getPosition(gameWindow), 280, 480);
-        }
-
-        /// MOVE WHITE KING ///
-        kingPieces.move(gameWindow,kingWhiteSelected,kingWhite_released, king_whiteSprite, sf::Mouse::getPosition(gameWindow), 400, 480);
-
-        /// MOVE WHITE QUEEN ///
-        queenPieces.move(gameWindow,queenWhiteSelected,queenWhite_released, queen_whiteSprite, sf::Mouse::getPosition(gameWindow), 340, 480);
-
-        /// ----------- MOVE BLACK PIECES ----------- ///
-
-        /// MOVE BLACK PAWNS ///
-        for(int p = 0; p < blackPawns.size(); p++)
-        {
-            pawnPieces.move(gameWindow,pawnBlackSelected,pawnBlack_released, blackPawns, sf::Mouse::getPosition(gameWindow), 160, 120);
-        }
-
-        /// MOVE BLACK ROOKS ///
-        for(int p = 0; p < blackRooks.size(); p++)
-        {
-            rookPieces.move(gameWindow,rookBlackSelected,rookBlack_released, blackRooks, sf::Mouse::getPosition(gameWindow), 160, 60);
-        }
-
-        /// MOVE BLACK KNIGHTS ///
-        for(int p = 0; p < blackKnights.size(); p++)
-        {
-            knightPieces.move(gameWindow,knightBlackSelected,knightBlack_released, blackKnights, sf::Mouse::getPosition(gameWindow), 220, 60);
-        }
-
-        /// MOVE BLACK BISHOPS ///
-        for(int p = 0; p < blackBishops.size(); p++)
-        {
-            bishopPieces.move(gameWindow,bishopBlackSelected,bishopBlack_released, blackBishops, sf::Mouse::getPosition(gameWindow), 280, 60);
-        }
-
-        /// MOVE BLACK KING ///
-        kingPieces.move(gameWindow,kingBlackSelected,kingBlack_released, king_blackSprite, sf::Mouse::getPosition(gameWindow), 400, 60);
-
-        /// MOVE BLACK QUEEN ///
-        queenPieces.move(gameWindow,queenBlackSelected,queenBlack_released,  queen_blackSprite, sf::Mouse::getPosition(gameWindow), 340, 60);
-
-        /// ---------- WIN CONDITION ---------- ///
-        /// Vector of vector for Black Pieces
-        vector<vector<sf::Sprite>> blackPieces;
-        blackPieces.push_back(blackPawns);
-        blackPieces.push_back(blackBishops);
-        blackPieces.push_back(blackRooks);
-        blackPieces.push_back(blackKnights);
-
-        /// Vector of vector for White Pieces
-        vector<vector<sf::Sprite>> whitePieces;
-        whitePieces.push_back(whitePawns);
-        whitePieces.push_back(whiteBishops);
-        whitePieces.push_back(whiteRooks);
-        whitePieces.push_back(whiteKnights);
-
-        /// WHEN WHITE KING OUT OF BOARD ///
-        /// When White King is captured by black pieces except Black King and Black Queen
-        winGame.isKingOutOfBoard(event2, gameWindow, king_whiteSprite, blackPieces, sf::Mouse::Right);
-
-        /// When White King is captured by Black King
-        winGame.isKingOutOfBoard2(event2,gameWindow,king_blackSprite,king_whiteSprite, sf::Mouse::Right);
-
-        /// When White King is captured by Black Queen
-        winGame.isKingOutOfBoard2(event2,gameWindow,queen_blackSprite,king_whiteSprite, sf::Mouse::Right);
-
-        /// WHEN BLACK KING OUT OF BOARD ///
-        /// When Black King is captured by white pieces except White King and White Queen
-        winGame.isKingOutOfBoard(event2, gameWindow, king_blackSprite, whitePieces, sf::Mouse::Left);
-
-        /// When Black King is captured by White King
-        winGame.isKingOutOfBoard2(event2,gameWindow,king_whiteSprite,king_blackSprite, sf::Mouse::Left);
-
-        /// When Black King is captured by White Queen
-        winGame.isKingOutOfBoard2(event2,gameWindow,queen_whiteSprite,king_blackSprite, sf::Mouse::Left);
-
-        /// --------- CAPTURE BEHAVIOR --------- ///
-
-        /// PAWNS ///
-        /// White Pieces can be captured by black pieces
-        winGame.capturePiece(event2, gameWindow, whitePawns, blackPieces, sf::Mouse::Right, 480,0);
-        /// Black Pieces can be captured by black pieces
-        winGame.capturePiece(event2, gameWindow, blackPawns, whitePieces, sf::Mouse::Left, 480,550);
-
-        /// ROOKS ///
-        /// White Pieces can be captured by black pieces
-        winGame.capturePiece(event2, gameWindow, whiteRooks, blackPieces, sf::Mouse::Right, 480,0);
-        /// Black Pieces can be captured by black pieces
-        winGame.capturePiece(event2, gameWindow, blackRooks, whitePieces, sf::Mouse::Left, 480,550);
-
-        /// KNIGHTS ///
-        /// White Pieces can be captured by black pieces
-        winGame.capturePiece(event2, gameWindow, whiteKnights, blackPieces, sf::Mouse::Right, 480,0);
-        /// Black Pieces can be captured by black pieces
-        winGame.capturePiece(event2, gameWindow, blackKnights, whitePieces, sf::Mouse::Left, 480,550);
-
-        /// BISHOPS ///
-        /// White Pieces can be captured by black pieces
-        winGame.capturePiece(event2, gameWindow, whiteBishops, blackPieces, sf::Mouse::Right, 480,0);
-        /// Black Pieces can be captured by black pieces
-        winGame.capturePiece(event2, gameWindow, blackBishops, whitePieces, sf::Mouse::Left, 480,550);
-
-        /// KINGS ///
-        /// Black King can be captured by white pieces and vice versa
-        winGame.capturePiece2(event2, gameWindow, king_blackSprite, whitePawns,sf::Mouse::Left, sf::Mouse::Right,480,550,480,0);
-        winGame.capturePiece2(event2, gameWindow, king_blackSprite, whiteBishops,sf::Mouse::Left, sf::Mouse::Right,480,550,480,0);
-        winGame.capturePiece2(event2, gameWindow, king_blackSprite,whiteKnights,sf::Mouse::Left, sf::Mouse::Right,480,550,480,0);
-        winGame.capturePiece2(event2, gameWindow, king_blackSprite,whiteRooks,sf::Mouse::Left, sf::Mouse::Right,480,550,480,0);
-
-        /// White King can be captured by black pieces and vice versa
-        winGame.capturePiece2(event2, gameWindow, king_whiteSprite, blackPawns,sf::Mouse::Right, sf::Mouse::Left,480,0,480,550);
-        winGame.capturePiece2(event2, gameWindow, king_whiteSprite, blackBishops,sf::Mouse::Right, sf::Mouse::Left,480,0,480,550);
-        winGame.capturePiece2(event2, gameWindow, king_whiteSprite,blackKnights,sf::Mouse::Right, sf::Mouse::Left,480,0,480,550);
-        winGame.capturePiece2(event2, gameWindow, king_whiteSprite,blackRooks,sf::Mouse::Right, sf::Mouse::Left,480,0,480,550);
-
-        /// Black King can be captured by White King and vice versa
-        winGame.capturePiece3(event2, gameWindow, king_blackSprite,king_whiteSprite);
-
-        /// Black King can be captured by White Queen and vice versa
-        winGame.capturePiece3(event2, gameWindow, king_blackSprite,queen_whiteSprite);
-
-        /// QUEENS ///
-        /// Black Queen can be captured by black pieces and vice versa
-        winGame.capturePiece2(event2, gameWindow, queen_blackSprite, whitePawns,sf::Mouse::Left, sf::Mouse::Right,480,550,480,0);
-        winGame.capturePiece2(event2, gameWindow, queen_blackSprite, whiteBishops,sf::Mouse::Left, sf::Mouse::Right,480,550,480,0);
-        winGame.capturePiece2(event2, gameWindow, queen_blackSprite,whiteKnights,sf::Mouse::Left, sf::Mouse::Right,480,550,480,0);
-        winGame.capturePiece2(event2, gameWindow, queen_blackSprite,whiteRooks,sf::Mouse::Left, sf::Mouse::Right,480,550,480,0);
-
-        /// White Queen can be captured by black pieces and vice versa
-        winGame.capturePiece2(event2, gameWindow, queen_whiteSprite, blackPawns,sf::Mouse::Right, sf::Mouse::Left,480,0,480,550);
-        winGame.capturePiece2(event2, gameWindow, queen_whiteSprite, blackBishops,sf::Mouse::Right, sf::Mouse::Left,480,0,480,550);
-        winGame.capturePiece2(event2, gameWindow, queen_whiteSprite,blackKnights,sf::Mouse::Right, sf::Mouse::Left,480,0,480,550);
-        winGame.capturePiece2(event2, gameWindow, queen_whiteSprite,blackRooks,sf::Mouse::Right, sf::Mouse::Left,480,0,480,550);
-
-        /// Black Queen can be captured by White Queen and vice versa
-        winGame.capturePiece3(event2, gameWindow, queen_blackSprite,queen_whiteSprite);
-
-        /// Black Queen can be captured by White King and vice versa
-        winGame.capturePiece3(event2, gameWindow, queen_blackSprite,king_whiteSprite);
-
-        /// -------- GAME WINDOW DISPLAY -------- ///
-        gameWindow.display();
     }
 }
+
