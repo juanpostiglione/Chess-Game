@@ -429,7 +429,7 @@ void GameWindow::GameWindowDisplay(Board& chessBoard, Pawn& pawnPieces, Rook& ro
             winGame.capturePiece3(event2, gameWindow, king_blackSprite,queen_whiteSprite);
 
             /// QUEENS ///
-            /// Black Queen can be captured by black pieces and vice versa
+            /// Black Queen can be captured by white pieces and vice versa
             winGame.capturePiece2(event2, gameWindow, queen_blackSprite, whitePawns,sf::Mouse::Left, sf::Mouse::Right,480,550,480,0);
             winGame.capturePiece2(event2, gameWindow, queen_blackSprite, whiteBishops,sf::Mouse::Left, sf::Mouse::Right,480,550,480,0);
             winGame.capturePiece2(event2, gameWindow, queen_blackSprite,whiteKnights,sf::Mouse::Left, sf::Mouse::Right,480,550,480,0);
