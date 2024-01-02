@@ -1,32 +1,32 @@
 #include "Bishop.h"
 
 /// FUNCTION TO DRAW AND MOVE BISHOP ///
-void Bishop::move(sf::RenderWindow& window, bool rookSelected, bool rookReleased,
-                vector<sf::Sprite>& rooks, const sf::Vector2i& mouse, int positionX, int positionY) const
+void Bishop::move(sf::RenderWindow& window, bool bishopSelected, bool bishopReleased,
+                vector<sf::Sprite>& bishops, const sf::Vector2i& mouse, int positionX, int positionY) const
 {
-    /// IF ROOK IS SELECTED, IT CAN BE SEEN WHILE IS BEING MOVED ///
-    for (int i = 0; i < rooks.size(); i++)
+    /// IF BISHOP IS SELECTED, IT CAN BE SEEN WHILE IS BEING MOVED ///
+    for (int i = 0; i < bishops.size(); i++)
     {
-        if (rookSelected && rooks[i].getGlobalBounds().contains(window.mapPixelToCoords(mouse)))
+        if (bishopSelected &&bishops[i].getGlobalBounds().contains(window.mapPixelToCoords(mouse)))
         {
-            rooks[i].setPosition(static_cast<float>(mouse.x - 30), static_cast<float>(mouse.y - 30));
-            window.draw(rooks[i]);
+            bishops[i].setPosition(static_cast<float>(mouse.x - 30), static_cast<float>(mouse.y - 30));
+            window.draw(bishops[i]);
         }
         else
         {
-            window.draw(rooks[i]);
+            window.draw(bishops[i]);
         }
 
-        /// IF ROOK IS RELEASED, IS PLACED AUTOMATICALLY IN THE CENTER OF A SQUARE ///
+        /// IF BISHOP IS RELEASED, IS PLACED AUTOMATICALLY IN THE CENTER OF A SQUARE ///
         const int centerPoint = 20;
-        int snappedX = static_cast<int>((rooks[i].getPosition().x + 0.5 * centerPoint) / centerPoint) * centerPoint;
-        int snappedY = static_cast<int>((rooks[i].getPosition().y + 0.5 * centerPoint) / centerPoint) * centerPoint;
-        rooks[i].setPosition(static_cast<float>(snappedX), static_cast<float>(snappedY));
+        int snappedX = static_cast<int>((bishops[i].getPosition().x + 0.5 * centerPoint) / centerPoint) * centerPoint;
+        int snappedY = static_cast<int>((bishops[i].getPosition().y + 0.5 * centerPoint) / centerPoint) * centerPoint;
+        bishops[i].setPosition(static_cast<float>(snappedX), static_cast<float>(snappedY));
 
-        /// DRAW ROOKS FROM THE BEGINNING ///
-        if (!rookReleased && !rookSelected)
+        /// DRAW BISHOPS FROM THE BEGINNING ///
+        if (!bishopReleased && !bishopSelected)
         {
-            rooks[i].setPosition(static_cast<float>((i * 180) + positionX), static_cast<float>(positionY));
+            bishops[i].setPosition(static_cast<float>((i * 180) + positionX), static_cast<float>(positionY));
         }
     }
 }
@@ -500,3 +500,5 @@ void Bishop::blackPieceRule(sf::Event &event, sf::RenderWindow &gameWindow, vect
         blackPieceBehavior(gameWindow, mouse2, posX, positionY,pieces);
     }
 }
+
+
