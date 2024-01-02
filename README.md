@@ -36,8 +36,8 @@ This class is used to create the second window for the game where the player is 
 ## Board Class
 This class is used to create the board of the game.
 
-## Piece Class
-This class is used to create a base class named Piece, with sub-classes for each piece of the game where each class have a function to be moved, and a function to set the state of each piece when they are selected and released. Inheritance is applied.
+## Rules Class
+This class is used to create a base class named Rules, with sub-classes for each piece of the game where each class have a function to be moved and drawn, and a function to set the rules of each piece movement when they are selected and released. Inheritance is applied.
 
 ## WinGame Class
 This class is used to create functions for the capture behavior of the pieces. Also, it contains a function to display the Win Window when a player wins.
