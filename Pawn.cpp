@@ -69,6 +69,19 @@ void Pawn::whitePieceBehavior(sf::RenderWindow &window, const sf::Vector2i &mous
                 nextPositionsY[i] += 120;
             }
 
+            /// Capture diagonally
+            else if (pieces[i].getPosition() == allowedPos3)
+            {
+                nextPositionsY[i] += 60;
+                nextPositionsX[i] += 60;
+            }
+            /// Capture diagonally
+            else if (pieces[i].getPosition() == allowedPos4)
+            {
+                nextPositionsY[i] += 60;
+                nextPositionsX[i] -= 60;
+            }
+
             else if(pieces[i].getGlobalBounds().contains(window.mapPixelToCoords(mouse2)))
             {
                 pieces[i].setPosition(latestPosition[i]);
@@ -147,8 +160,10 @@ void Pawn::blackPieceBehavior(sf::RenderWindow &window, const sf::Vector2i &mous
     for (int i = 0; i < pieces.size(); i++)
     {
         /// CREATE POSITIONS ALLOWED IN THE BOARD ///
-        sf::Vector2f allowedPos((i * 60) + positionX, positionY - nextPositionsX2[i] + 60);
-        sf::Vector2f allowedPos2((i * 60) + positionX, positionY - nextPositionsX2[i] + 120);
+        sf::Vector2f allowedPos((i * 60) + positionX + nextPositionsX2[i], positionY - nextPositionsY2[i] + 60);
+        sf::Vector2f allowedPos2((i * 60) + positionX + nextPositionsX2[i], positionY - nextPositionsY2[i] + 120);
+        sf::Vector2f allowedPos3((i * 60) + positionX + nextPositionsX2[i] - 60, positionY - nextPositionsY2[i] + 60);
+        sf::Vector2f allowedPos4((i * 60) + positionX + nextPositionsX2[i] + 60, positionY - nextPositionsY2[i] + 60);
 
 
         /// IF THE PIECE IS POSITIONED IN THE ALLOWED POSITION, COUNTER INCREASE ///
@@ -161,14 +176,29 @@ void Pawn::blackPieceBehavior(sf::RenderWindow &window, const sf::Vector2i &mous
         /// THE FIRST MOVEMENT, THE PAWN COULD MOVE ONE OR TWO STEPS ///
         if(counterMove2[i] == 1)
         {
+            /// One step
             if (pieces[i].getPosition() == allowedPos)
             {
-                nextPositionsX2[i] -= 60;
+                nextPositionsY2[i] -= 60;
             }
 
+                /// Two step
             else if (pieces[i].getPosition() == allowedPos2)
             {
-                nextPositionsX2[i] -= 120;
+                nextPositionsY2[i] -= 120;
+            }
+
+                /// Capture diagonally
+            else if (pieces[i].getPosition() == allowedPos3)
+            {
+                nextPositionsY2[i] -= 60;
+                nextPositionsX2[i] -= 60;
+            }
+                /// Capture diagonally
+            else if (pieces[i].getPosition() == allowedPos4)
+            {
+                nextPositionsY2[i] -= 60;
+                nextPositionsX2[i] += 60;
             }
 
             else if(pieces[i].getGlobalBounds().contains(window.mapPixelToCoords(mouse2)))
@@ -177,13 +207,28 @@ void Pawn::blackPieceBehavior(sf::RenderWindow &window, const sf::Vector2i &mous
             }
         }
 
-        /// AFTER FIRST MOVE, PAWN MOVES ONLY WITH ONE STEP ///
+            /// AFTER FIRST MOVE, PAWN MOVES ONLY WITH ONE STEP ///
         else
         {
+            /// One step
             if (pieces[i].getPosition() == allowedPos)
             {
+                nextPositionsY2[i] += 60;
+            }
+                /// Capture diagonally
+            else if (pieces[i].getPosition() == allowedPos3)
+            {
+                nextPositionsY2[i] -= 60;
                 nextPositionsX2[i] -= 60;
             }
+                /// Capture diagonally
+            else if (pieces[i].getPosition() == allowedPos4)
+            {
+                nextPositionsY2[i] -= 60;
+                nextPositionsX2[i] += 60;
+            }
+
+                /// IF POSITION NOT ALLOWED, RETURN TO IS LATEST POSITION
             else if(pieces[i].getGlobalBounds().contains(window.mapPixelToCoords(mouse2)))
             {
                 pieces[i].setPosition(latestPosition2[i]);
@@ -226,5 +271,4 @@ void Pawn::blackPieceRule(sf::Event &event, sf::RenderWindow &gameWindow, vector
         blackPieceBehavior(gameWindow, mouse2, posX, positionY,pieces);
     }
 }
-
 
