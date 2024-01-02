@@ -10,7 +10,7 @@ FetchContent_Declare(SFML
         GIT_TAG 2.6.x)
 FetchContent_MakeAvailable(SFML)
 
-add_executable(Chess main.cpp TextureManager.cpp WelcomeWindow.cpp GameWindow.h GameWindow.cpp Board.cpp)
+add_executable(Chess main.cpp TextureManager.cpp WelcomeWindow.cpp GameWindow.h GameWindow.cpp Board.cpp WinGame.h WinGame.cpp Rules.h Pawn.h Pawn.cpp Knight.h Knight.cpp Rook.h Rook.cpp Bishop.h Bishop.cpp King.h King.cpp King.cpp Queen.h Queen.cpp)
 target_link_libraries(Chess PRIVATE sfml-graphics)
 target_compile_features(Chess PRIVATE cxx_std_17)
 
