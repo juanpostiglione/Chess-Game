@@ -31,7 +31,7 @@ The project is divided in different classes with useful functions for each objec
 This class is used to create the first window for the game, press ENTER to play.
 
 ## Game Window
-This class is used to create the second window for the game where the player is going to play. Inside this class, there are functions from the Board class, Piece class and WinGame class, used to implement the logic of the game.
+This class is used to create the second window for the game where the player is going to play. Inside this class, there are functions from the Board class, Rules class and WinGame class, used to implement the logic of the game.
 
 ## Board Class
 This class is used to create the board of the game.
