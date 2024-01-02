@@ -32,3 +32,4 @@ void Board::drawBoard(sf::RenderWindow& window, sf::RectangleShape& greenRectang
         }
     }
 }
+
