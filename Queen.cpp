@@ -61,7 +61,7 @@ void Queen::whitePieceRule(sf::Event &event, sf::RenderWindow &gameWindow, sf::S
 }
 
 /// RULE MOVEMENT FUNCTION FOR BLACK QUEEN ///
-void Queen::blackPieceRule(sf::Event &event, sf::RenderWindow &gameWindow, sf::Sprite& king,
+void Queen::blackPieceRule(sf::Event &event, sf::RenderWindow &gameWindow, sf::Sprite& queen,
                           bool &piece_selected, bool &piece_released, int posX, int positionY,
                           const sf::Vector2i &mouse2)
 {
@@ -75,7 +75,7 @@ void Queen::blackPieceRule(sf::Event &event, sf::RenderWindow &gameWindow, sf::S
         for (int i = 0; i < 1; i++)
         {
             /// IF A PIECE IS CLICKED ///
-            if (king.getGlobalBounds().contains(gameWindow.mapPixelToCoords(mouse)))
+            if (queen.getGlobalBounds().contains(gameWindow.mapPixelToCoords(mouse)))
             {
                 piece_selected = true;
                 piece_released = false;
